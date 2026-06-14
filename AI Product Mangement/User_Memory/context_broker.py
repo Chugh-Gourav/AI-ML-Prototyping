@@ -6,21 +6,7 @@ import mlflow
 import llm_client
 from models import TravelAgentProfile, AgentState
 
-"""
-PRODUCT MANAGEMENT ARCHITECTURE NOTES: THE HCE AS AN AI-NATIVE CDP
 
-1. The Death of Reverse ETL (Hightouch/Census):
-   Traditional personalization pipelines rely on batch-processing: App -> Data Warehouse (Snowflake) 
-   -> dbt (segmentation) -> Reverse ETL (Hightouch) -> CRM (Braze).
-   By running Intent/Memory extraction directly at the application edge (the Context Broker), 
-   we collapse the 24-hour batch cycle into 24 milliseconds. The HCE dynamically segments the user 
-   and pushes a direct event payload (with pre-generated LLM copy) directly to the CRM delivery pipe.
-
-2. The CRM becomes a "Dumb Pipe":
-   Instead of Product/Marketing teams building complex "If/Else" rule trees inside Braze or Iterable, 
-   the logic shifts entirely into the Context Engine. The CRM's only job is to deliver the exact 
-   120-character string payload handed to it by the LLM.
-"""
 
 class ContextBroker:
     def __init__(self, profiles: list[TravelAgentProfile]):

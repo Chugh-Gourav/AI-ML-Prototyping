@@ -1,47 +1,33 @@
 # Product Specification: Skyscanner Horizontal Context Engine ("Traveller Memory")
 
-## Architecture Overview: The AI-Native Data Pipeline
+## Architecture Overview: The AI-Native Memory Layer
 
 ```mermaid
 graph TD
-    %% Define Styles
-    classDef legacy fill:#ffe6e6,stroke:#ff6666,stroke-width:2px,color:#990000;
-    classDef aiNative fill:#e6ffe6,stroke:#66ff66,stroke-width:2px,color:#006600;
     classDef client fill:#e6e6ff,stroke:#6666ff,stroke-width:2px;
+    classDef aiNative fill:#e6ffe6,stroke:#66ff66,stroke-width:2px,color:#006600;
 
-    %% Client Layer
-    subgraph Client [Client Application]
-        A[User Session / Frontend]:::client
+    subgraph Client [Frontend / App]
+        A[User Session Interactions <br/> Searches, Filters, Redirects]:::client
     end
 
-    %% Legacy Flow
-    subgraph Legacy [Legacy Data Stack / Batch Pipeline]
-        B[Data Warehouse <br/> Snowflake/BigQuery]:::legacy
-        C[Reverse ETL <br/> Hightouch/Census]:::legacy
+    subgraph Core [Horizontal Context Engine]
+        B[Context Broker <br/> Session State Management]:::aiNative
+        C[Gemini 2.5 Flash <br/> Intent & Memory Extraction]:::aiNative
+        D[(In-Memory Profile DB <br/> Segment & Preferences)]:::aiNative
     end
 
-    %% AI-Native Flow
-    subgraph AINative [AI-Native Context Pipeline / Real-Time]
-        D[Horizontal Context Engine <br/> Context Broker + LLM]:::aiNative
-        E[Event Stream <br/> Kafka/PubSub]:::aiNative
+    subgraph Delivery [Lifecycle & Personalization]
+        E[UI Layout Optimization <br/> Flights, Stays, Transport]:::client
+        F[Push Notification Generation <br/> Deep-Linked Context Rehydration]:::client
     end
 
-    %% Delivery Layer
-    subgraph Delivery [CRM / Delivery]
-        F[Push Notification API <br/> Braze/Iterable]:::client
-    end
-
-    %% Connections
-    A -- "Raw Clickstream Log" --> B
-    B -- "24-Hour Batch Segmentation" --> C
-    C -- "Segment Sync" --> F
-
-    A -- "JSON Interaction Context" --> D
-    D -- "Real-Time Extract & Generate Copy" --> E
-    E -- "Payload Delivery Event" --> F
+    A -- "Raw JSON Clickstream" --> B
+    B -- "Analyzes Bag of Clicks" --> C
+    C -- "Infers Structured Memory" --> D
+    D -- "Real-Time Context Token" --> E
+    D -- "Triggers Personalized Copy" --> F
 ```
-
-> **PM Note:** The architectural shift replaces slow, batch-oriented data pipelines (Snowflake -> Hightouch) with real-time AI Agents (Context Engine -> Event Stream), moving intelligence directly to the application layer.
 
 ## 1. Executive Summary & Product Vision
 In traditional metasearch engines like Skyscanner, Flights, Stays (Hotels), and Transport (Car Hire) operate in commercial and technical silos. When a user selects a flight to London and redirects to an airline/OTA to book, navigating back to Skyscanner's Stays tab resets their search context. They are forced to re-enter dates, destinations, and room requirements, resulting in a fractured user experience and a low cross-vertical redirect attachment rate.
