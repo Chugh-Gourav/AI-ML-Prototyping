@@ -45,7 +45,7 @@ graph TD
 *   **Context Broker:** The central orchestration layer. It intercepts real-time clickstream events, manages the user's active session state, and determines when to trigger LLM intent extraction.
 *   **LLM Intent & Memory Extraction:** The reasoning engine. It ingests the raw JSON clickstream and infers structured, contextual memory (e.g., identifying a user as a "Solo Backpacker" based on their search parameters). 
 *   **In-Memory Profile DB:** A low-latency access layer (simulating Redis) that holds the active structured user profile for real-time querying.
-*   **Long-Term Memory Storage:** While the active session lives in memory, persistent user traits are synced asynchronously to a Data Warehouse (e.g., Databricks/BigQuery). This enables downstream data pipelines to utilize rich, LLM-inferred segments for offline analytics, cohort analysis, and long-term CRM campaigns.
+*   **Long-Term Memory Storage:** While the active session lives in memory, persistent user traits are synced asynchronously to a Data Warehouse (e.g., Databricks/BigQuery). This enables downstream data pipelines to utilize rich, LLM-inferred segments for offline analytics, cohort analysis, long-term CRM campaigns, and training downstream Machine Learning models (e.g., churn prediction or LTV forecasting based on extracted personas).
 *   **UI Layout Optimization & Push Generation:** The downstream consumers of the memory. *Example: A user searches for a budget, carry-on-only flight to Berlin. When they navigate to the "Stays" tab, the UI queries the Context Broker and automatically adapts the layout to highlight top-rated backpacker hostels in Berlin, rather than showing generic luxury family resorts.*
 
 ## Economics at Scale: Cost Projections
