@@ -6,6 +6,7 @@
 graph TD
     classDef client fill:#e6e6ff,stroke:#6666ff,stroke-width:2px;
     classDef aiNative fill:#e6ffe6,stroke:#66ff66,stroke-width:2px,color:#006600;
+    classDef storage fill:#ffeedd,stroke:#ff9933,stroke-width:2px;
 
     subgraph Client [Frontend / App]
         A[User Session Interactions <br/> Searches, Filters, Redirects]:::client
@@ -14,7 +15,11 @@ graph TD
     subgraph Core [Horizontal Context Engine]
         B[Context Broker <br/> Session State Management]:::aiNative
         C[Large Language Model <br/> Intent & Memory Extraction]:::aiNative
-        D[(In-Memory Profile DB <br/> Segment & Preferences)]:::aiNative
+        D[(In-Memory Profile DB <br/> Real-Time Segment & Preferences)]:::aiNative
+    end
+
+    subgraph Analytics [Data Engineering]
+        G[(Data Warehouse <br/> Long-Term Storage & Pipelines)]:::storage
     end
 
     subgraph Delivery [Lifecycle & Personalization]
@@ -27,6 +32,7 @@ graph TD
     C -- "Infers Structured Memory" --> D
     D -- "Real-Time Context Token" --> E
     D -- "Triggers Personalized Copy" --> F
+    D -- "Async Batch Sync" --> G
 ```
 
 ## 1. Executive Summary & Product Vision
