@@ -98,7 +98,7 @@ To clearly show the value of this feature, we separate our metrics into Inputs, 
 *   **Storage Speed:** Checking if our fast storage (Redis) is successfully keeping the website loading quickly.
 
 **2. Main Goals (Output Metrics):**
-*   **Cross-Selling Rate:** The primary North Star. In our simulated test (Control vs. Treatment), the attach rate from Flights to Stays increased from a baseline of ~30% to over 60%, resulting in an estimated **~2x lift** in cross-vertical engagement.
+*   **Cross-Selling Rate:** The primary North Star for a production rollout. In our local test (Control vs. Treatment), the attach rate from Flights to Stays increased from a baseline of ~30% to over 60%, resulting in an estimated **~2x lift** in cross-vertical engagement. *(Note: this ~2x lift validates the memory-extraction mechanism in a simulated environment; it is not a measured production result).*
 *   **Customer Acquisition Cost:** By showing users what they want without them starting a new search, we effectively acquire leads for the Stays vertical for free instead of paying for external ads.
 *   **Conversion Increase:** Getting more users to successfully click through to our partners because the process is highly relevant.
 
