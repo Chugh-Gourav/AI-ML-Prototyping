@@ -2,7 +2,7 @@ class VerticalModules:
     @staticmethod
     def get_flights_layout(token: dict, is_treatment: bool, destination: str) -> str:
         if not is_treatment or not token["core_identity"]["consent"]:
-            return "DEFAULT_SORT: Price/Duration Ascending | BANNERS: Generic Skyscanner Promo"
+            return "DEFAULT_SORT: Price/Duration Ascending | BANNERS: Generic Context Engine Promo"
             
         persona = token["intent_token"]["trip_vibe"]
         alliance = token["operational_preferences"]["preferred_alliance"]
@@ -29,7 +29,20 @@ class VerticalModules:
         return layout
 
     @staticmethod
-    def get_stays_layout(token: dict, is_treatment: bool, destination: str) -> str:
+    def get_packages_layout(token: dict, is_treatment: bool, destination: str) -> str:
+        if not is_treatment or not token["core_identity"]["consent"]:
+            return "DEFAULT_PACKAGES_SORT: Popularity | Falcon Packages Layout"
+            
+        persona = token["intent_token"]["trip_vibe"]
+        if persona == "Multi-Gen Family Planner":
+            return "PACKAGE_SORT: All-inclusive resorts with kid-friendly activities | Falcon Packages Layout"
+        elif persona == "Business Bleisure":
+            return "PACKAGE_SORT: Premium city-center hotels with lounge access | Falcon Packages Layout"
+        else:
+            return "PACKAGE_SORT: Refined recommendations based on history | Falcon Packages Layout"
+
+    @staticmethod
+    def get_stays_layout(token: dict, is_treatment: bool, destination: str, conversational: bool = False) -> str:
         if not is_treatment or not token["core_identity"]["consent"]:
             return "DEFAULT_HOTEL_SORT: Popularity | INPUTS: Empty Dates & Destination"
             
@@ -42,25 +55,32 @@ class VerticalModules:
         else:
             layout += "INPUTS: Blank | "
             
-        layout += "HCE_HOTEL_SORT: "
-        if persona == "Multi-Gen Family Planner":
-            layout += f"FamilyFilter: Multi-room apartments, pools, and airport transfers near {destination}"
-        elif persona == "Business Bleisure":
-            layout += "BusinessFilter: Workspaces, High-speed Wi-Fi, and late checkout stays"
-        elif persona == "Solo Explorer":
-            layout += "SoloFilter: Top social hostels, homestays, and shared spaces"
+        if conversational:
+            layout += "CONVERSATIONAL_STAYS_UI: Chatbot layout | "
+            layout += f"HCE_HOTEL_SORT: 'Boutique Covent Garden stays' tailored for {persona}"
         else:
-            layout += "GenericRefinedSort"
+            layout += "HCE_HOTEL_SORT: "
+            if persona == "Multi-Gen Family Planner":
+                layout += f"FamilyFilter: Multi-room apartments, pools, and airport transfers near {destination}"
+            elif persona == "Business Bleisure":
+                layout += "BusinessFilter: Workspaces, High-speed Wi-Fi, and late checkout stays"
+            elif persona == "Solo Explorer":
+                layout += "SoloFilter: Top social hostels, homestays, and shared spaces"
+            else:
+                layout += "GenericRefinedSort"
             
         return layout
 
     @staticmethod
-    def get_transport_layout(token: dict, is_treatment: bool, destination: str) -> str:
+    def get_transport_layout(token: dict, is_treatment: bool, destination: str, road_trip: bool = False) -> str:
         if not is_treatment or not token["core_identity"]["consent"]:
             return "DEFAULT_CAR_SORT: Price Ascending"
             
         persona = token["intent_token"]["trip_vibe"]
         anxiety = token["operational_preferences"]["proximity_anxiety"]
+        
+        if road_trip:
+            return "ROAD_TRIP_PLANNER_UI: Custom Road Trip Discovery Flow | " + f"CAR_SORT: tailored for {persona} exploring {destination}"
         
         if destination in ["LON", "EDI"] and anxiety == "high":
             return "ANXIETY_NUDGE: Heathrow Express/LNER Rail Ticket Redirect featured prominently over car hire"

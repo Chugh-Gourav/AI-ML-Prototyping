@@ -1,4 +1,4 @@
-# Product Specification: Skyscanner Horizontal Context Engine ("Traveller Memory")
+# Product Specification: Context Engine Horizontal Context Engine ("Traveller Memory")
 
 ## Architecture Overview: The AI-Native Memory Layer
 
@@ -36,7 +36,7 @@ graph TD
 ```
 
 ## 1. Executive Summary & Product Vision
-In traditional metasearch engines like Skyscanner, Flights, Stays (Hotels), and Transport (Car Hire) operate in commercial and technical silos. When a user selects a flight to London and redirects to an airline/OTA to book, navigating back to Skyscanner's Stays tab resets their search context. They are forced to re-enter dates, destinations, and room requirements, resulting in a fractured user experience and a low cross-vertical redirect attachment rate.
+In traditional metasearch engines like Context Engine, Flights, Stays (Hotels), and Transport (Car Hire) operate in commercial and technical silos. When a user selects a flight to London and redirects to an airline/OTA to book, navigating back to Context Engine's Stays tab resets their search context. They are forced to re-enter dates, destinations, and room requirements, resulting in a fractured user experience and a low cross-vertical redirect attachment rate.
 
 The **Horizontal Context Engine (HCE)**, or **Traveller Memory**, resolves this by introducing a centralized, in-memory context layer. By stitching user identity across sessions (using profiles or anonymous consent-based cookie stitching), HCE dynamically refactors UI hierarchies, search filters, and marketing notifications in real-time.
 
@@ -45,7 +45,7 @@ To prove the feasibility of this engine, this prototype runs an **LLM-powered si
 ---
 
 ## 2. Signal Collection: Building the Memory Engine
-To construct a reliable traveler memory, HCE collects explicit and implicit signals across Skyscanner's touchpoints:
+To construct a reliable traveler memory, HCE collects explicit and implicit signals across Context Engine's touchpoints:
 
 ```
 [SEARCH TOUCHPOINTS] ──> (Flights, Stays, Transport)
@@ -91,7 +91,7 @@ An in-memory store that holds decoupled tokens for each user, manages session/co
 * **Stitching Logic**: Anonymous consented users have cookies stitched to a persistent personalisation ID. Opted-out users are blocked from stitching.
 
 ### 3.3 `VerticalModules` (Mock UIs)
-Functions representing Flights, Stays, and Transport that consume the Base64-decoded token header (`X-Skyscanner-HCE-Token`) and refactor page hierarchies:
+Functions representing Flights, Stays, and Transport that consume the Base64-decoded token header (`X-Context Engine-HCE-Token`) and refactor page hierarchies:
 * **Flights Layout**: Displays LCC focus for Value Hackers (with upfront baggage alerts); prioritizes alliance carriers for Loyalty Loyalists.
 * **Stays Layout**: Pre-fills dates matching the active flight redirect, and centers hotel searches near LHR/BOM.
 * **Transport Layout**: Displays large SUVs for Family Planners; displays Heathrow Express transit links for travelers with high airport anxiety.
@@ -115,7 +115,7 @@ When a Treatment agent abandons their flight search, HCE triggers a **Price Drop
 ---
 
 ## 5. Experimentation Strategy
-To launch HCE safely, Skyscanner PMs must leverage a staged experimentation playbook:
+To launch HCE safely, Context Engine PMs must leverage a staged experimentation playbook:
 
 ```
 [EXPERIMENTATION MATRIX]

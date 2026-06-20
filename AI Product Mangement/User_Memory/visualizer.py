@@ -36,7 +36,7 @@ def generate_html_visualizer(agents: list[TravelAgentProfile], interaction_logs:
         agents_json.append({
             "profile": asdict(a),
             "token": mock_token,
-            "header": f"X-Skyscanner-HCE-Token: {b64_header}",
+            "header": f"X-Context Engine-HCE-Token: {b64_header}",
             "interaction_logs": agent_logs,
             "communications_logs": agent_comms
         })
@@ -46,19 +46,19 @@ def generate_html_visualizer(agents: list[TravelAgentProfile], interaction_logs:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skyscanner HCE - Traveller Memory Visualizer</title>
+    <title>Context Engine HCE - Traveller Memory Visualizer</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Skyscanner Brand Palette & Layout Styling */
-            --bg-color: #f1f2f8; /* clean grey-white background for real Skyscanner feel */
+            /* Context Engine Brand Palette & Layout Styling */
+            --bg-color: #f1f2f8; /* clean grey-white background for real Context Engine feel */
             --panel-bg: #ffffff; /* white panels */
             --border-color: #dcdfe6;
             --text-color: #070a25; /* deep navy text */
             --text-muted: #626573;
-            --sky-blue: #0062e3; /* Skyscanner Brand Blue */
-            --brand-green: #00a699; /* Skyscanner Brand Green */
-            --brand-navy: #070a25; /* Skyscanner deep navy */
+            --sky-blue: #0062e3; /* Context Engine Brand Blue */
+            --brand-green: #00a699; /* Context Engine Brand Green */
+            --brand-navy: #070a25; /* Context Engine deep navy */
             --nudge-bg: rgba(0, 166, 153, 0.08);
             --nudge-border: rgba(0, 166, 153, 0.3);
             --nudge-text: #00877a;
@@ -218,7 +218,7 @@ def generate_html_visualizer(agents: list[TravelAgentProfile], interaction_logs:
             margin-bottom: 16px;
         }
         
-        /* UI MOCKUPS - White Skyscanner Theme */
+        /* UI MOCKUPS - White Context Engine Theme */
         .panel {
             background: var(--panel-bg);
             border: 1px solid var(--border-color);
@@ -277,7 +277,7 @@ def generate_html_visualizer(agents: list[TravelAgentProfile], interaction_logs:
             transform: translateX(20px);
         }
         
-        .skyscanner-screen {
+        .context-engine-screen {
             background: #f4f5f8;
             border-radius: 10px;
             border: 1px solid var(--border-color);
@@ -287,7 +287,7 @@ def generate_html_visualizer(agents: list[TravelAgentProfile], interaction_logs:
             font-size: 13px;
         }
         
-        .skyscanner-header {
+        .context-engine-header {
             background: var(--brand-navy);
             padding: 14px 16px;
             display: flex;
@@ -321,7 +321,7 @@ def generate_html_visualizer(agents: list[TravelAgentProfile], interaction_logs:
             border-bottom-color: var(--sky-blue);
         }
         
-        /* Clean Skyscanner Search Widget */
+        /* Clean Context Engine Search Widget */
         .search-widget-container {
             background: #ffffff;
             padding: 12px;
@@ -537,7 +537,7 @@ def generate_html_visualizer(agents: list[TravelAgentProfile], interaction_logs:
         <div class="logo-title">
             <div class="logo">S</div>
             <div>
-                <h1>Skyscanner HCE - Traveller Memory Visualizer</h1>
+                <h1>Context Engine HCE - Traveller Memory Visualizer</h1>
                 <p style="color: var(--text-muted); font-size: 12px;">Centralized Horizontal Context Engine (A/B Test Verification Playground)</p>
             </div>
         </div>
@@ -566,7 +566,7 @@ def generate_html_visualizer(agents: list[TravelAgentProfile], interaction_logs:
                 
                 <div id="profile-fields"></div>
                 
-                <span class="code-label">X-Skyscanner-HCE-Token (API Header Contract)</span>
+                <span class="code-label">X-Context Engine-HCE-Token (API Header Contract)</span>
                 <div class="code-box" id="header-box"></div>
                 
                 <span class="code-label">Context Broker Active Decoded Token</span>
@@ -584,10 +584,10 @@ def generate_html_visualizer(agents: list[TravelAgentProfile], interaction_logs:
                 <span style="font-size: 10px; padding: 2px 8px; background: #fafafa; border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-muted);">Siloed UI</span>
             </div>
             
-            <div class="scrollable-content skyscanner-screen" id="control-screen">
-                <div class="skyscanner-header">
+            <div class="scrollable-content context-engine-screen" id="control-screen">
+                <div class="context-engine-header">
                     <div style="font-weight: 700; color: #ffffff; font-size: 15px; display:flex; align-items:center; gap:6px;">
-                        <span style="background:var(--sky-blue); color:white; border-radius:3px; padding: 1px 5px; font-size:11px;">S</span> Skyscanner
+                        <span style="background:var(--sky-blue); color:white; border-radius:3px; padding: 1px 5px; font-size:11px;">S</span> Context Engine
                     </div>
                     <div id="control-market-badge" style="font-size: 10px; color: #a3a6b5;">IN | INR</div>
                 </div>
@@ -609,10 +609,10 @@ def generate_html_visualizer(agents: list[TravelAgentProfile], interaction_logs:
                 <span style="font-size: 10px; padding: 2px 8px; background: rgba(0,166,153,0.06); border: 1px solid rgba(0,166,153,0.2); border-radius: 4px; color: var(--brand-green);">HCE Active</span>
             </div>
             
-            <div class="scrollable-content skyscanner-screen" id="treatment-screen" style="border-color: rgba(0,166,153,0.2);">
-                <div class="skyscanner-header">
+            <div class="scrollable-content context-engine-screen" id="treatment-screen" style="border-color: rgba(0,166,153,0.2);">
+                <div class="context-engine-header">
                     <div style="font-weight: 700; color: #ffffff; font-size: 15px; display:flex; align-items:center; gap:6px;">
-                        <span style="background:var(--brand-green); color:white; border-radius:3px; padding: 1px 5px; font-size:11px;">S</span> Skyscanner
+                        <span style="background:var(--brand-green); color:white; border-radius:3px; padding: 1px 5px; font-size:11px;">S</span> Context Engine
                     </div>
                     <div id="treatment-market-badge" style="font-size: 10px; color: var(--brand-green); font-weight:600;">HCE ACTIVE</div>
                 </div>
@@ -661,7 +661,7 @@ def generate_html_visualizer(agents: list[TravelAgentProfile], interaction_logs:
                 
                 const tokenStr = JSON.stringify(data.token);
                 const b64 = btoa(unescape(encodeURIComponent(tokenStr)));
-                data.header = "X-Skyscanner-HCE-Token: " + b64;
+                data.header = "X-Context Engine-HCE-Token: " + b64;
             }
 
             const profile = data.profile;
