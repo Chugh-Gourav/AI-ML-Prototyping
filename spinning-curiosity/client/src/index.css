@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: theme('colors.background');
+  color: theme('colors.primary');
+  @apply antialiased;
+  font-feature-settings: "cv11", "ss01";
+}
+
+@layer utilities {
+  .ai-summary-content ul {
+    @apply list-disc list-inside space-y-2 mt-1 ml-1;
+  }
+
+  .ai-summary-content li {
+    @apply text-purple-900 leading-relaxed;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
